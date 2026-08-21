@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>StockSync AI - Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            StockSync AI
+        </div>
+
+        <ul class="nav-menu">
+
+            <li>
+                <a href="/dashboard">Dashboard</a>
+            </li>
+
+            <li>
+                <a href="/upload">Upload Dataset</a>
+            </li>
+
+            <li>
+                <a href="/analysis">Inventory Analysis</a>
+            </li>
+
+            <li>
+                <a href="/reports">Reports</a>
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <main class="main-content">
+
+        <div class="page-header">
+
+            <h1>Dashboard</h1>
+
+            <p>
+                Overview of your retail inventory data.
+            </p>
+
+        </div>
+
+        <div class="card-grid">
+
+            <div class="card">
+                <h3>Total Products</h3>
+                <div class="number">0</div>
+            </div>
+
+            <div class="card">
+                <h3>Total Stores</h3>
+                <div class="number">0</div>
+            </div>
+
+            <div class="card">
+                <h3>High Risk Products</h3>
+                <div class="number">0</div>
+            </div>
+
+        </div>
+
+        <div class="placeholder">
+
+            <h2>Inventory Overview</h2>
+
+            <p>
+                Inventory analysis will appear here after datasets
+                are uploaded.
+            </p>
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+</html>
