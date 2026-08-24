@@ -83,6 +83,33 @@
             </div>
 
 
+            <!-- Dashboard filters -->
+            <div class="filters">
+
+                <input
+                    id="productSearch"
+                    type="text"
+                    placeholder="Search product or ID..."
+                    autocomplete="off"
+                >
+
+                <select id="riskFilter">
+                    <option value="all">All Risks</option>
+                    <option value="critical">Critical</option>
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+
+            </div>
+
+
+            <!-- Result count -->
+            <p class="result-count" id="resultCount">
+                Showing {{ products|length }} of {{ products|length }} products
+            </p>
+
+
             <div class="table-wrapper">
 
                 <table>
@@ -101,11 +128,11 @@
                         </tr>
                     </thead>
 
-                    <tbody>
+                    <tbody id="productTableBody">
 
                         {% for product in products %}
 
-                        <tr>
+                        <tr class="product-row">
 
                             <td>
                                 <strong>
@@ -163,11 +190,23 @@
 
                 </table>
 
+                <!-- Displayed when no products match -->
+                <div class="no-results" id="noResults">
+                    <strong>No products found</strong>
+                    <p>
+                        Try a different product name, product ID, or risk level.
+                    </p>
+                </div>
+
             </div>
 
         </section>
 
     </main>
+
+
+    <!-- Dashboard interaction JavaScript -->
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
 
 </body>
 </html>
