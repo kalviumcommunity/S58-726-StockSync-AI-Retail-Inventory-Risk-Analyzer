@@ -171,3 +171,14 @@ body {
 .placeholder p {
     color: #64748b;
 }
+
+.kpi-description {
+    margin-top: 8px;
+    font-size: 13px;
+    opacity: 0.7;
+}
+
+.card .number {
+    font-size: 32px;
+    font-weight: 700;
+}

@@ -7,8 +7,10 @@
 
     <title>StockSync AI - Dashboard</title>
 
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='css/style.css') }}">
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
 </head>
 
 <body>
@@ -43,6 +45,7 @@
 
     </aside>
 
+
     <main class="main-content">
 
         <div class="page-header">
@@ -50,37 +53,81 @@
             <h1>Dashboard</h1>
 
             <p>
-                Overview of your retail inventory data.
+                Overview of your retail inventory risk.
             </p>
 
         </div>
+
 
         <div class="card-grid">
 
             <div class="card">
                 <h3>Total Products</h3>
-                <div class="number">0</div>
+
+                <div class="number">
+                    {{ total_products }}
+                </div>
+
+                <p class="kpi-description">
+                    Products analyzed
+                </p>
             </div>
+
 
             <div class="card">
                 <h3>Total Stores</h3>
-                <div class="number">0</div>
+
+                <div class="number">
+                    {{ total_stores }}
+                </div>
+
+                <p class="kpi-description">
+                    Stores covered
+                </p>
             </div>
+
 
             <div class="card">
                 <h3>High Risk Products</h3>
-                <div class="number">0</div>
+
+                <div class="number">
+                    {{ high_risk_products }}
+                </div>
+
+                <p class="kpi-description">
+                    High and critical risk
+                </p>
+            </div>
+
+
+            <div class="card">
+                <h3>Critical Products</h3>
+
+                <div class="number">
+                    {{ critical_products }}
+                </div>
+
+                <p class="kpi-description">
+                    Require urgent attention
+                </p>
             </div>
 
         </div>
+
 
         <div class="placeholder">
 
             <h2>Inventory Overview</h2>
 
             <p>
-                Inventory analysis will appear here after datasets
-                are uploaded.
+                The dashboard is currently analyzing
+                {{ total_products }} products across
+                {{ total_stores }} stores.
+            </p>
+
+            <p>
+                {{ high_risk_products }} products are currently
+                classified as high or critical risk.
             </p>
 
         </div>
