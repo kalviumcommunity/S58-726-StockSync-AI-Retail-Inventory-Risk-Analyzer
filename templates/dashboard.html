@@ -59,6 +59,8 @@
         </div>
 
 
+        <!-- KPI CARDS -->
+
         <div class="card-grid">
 
             <div class="card">
@@ -114,6 +116,73 @@
 
         </div>
 
+
+        <!-- RISK DISTRIBUTION -->
+
+        <div class="risk-section">
+
+            <div class="section-header">
+
+                <h2>Risk Distribution</h2>
+
+                <p>
+                    Distribution of products across risk levels.
+                </p>
+
+            </div>
+
+
+            <div class="risk-grid">
+
+                <div class="risk-card risk-low">
+                    <h3>Low Risk</h3>
+
+                    <div class="risk-number">
+                        {{ risk_summary.get('LOW', 0) }}
+                    </div>
+
+                    <p>Products</p>
+                </div>
+
+
+                <div class="risk-card risk-medium">
+                    <h3>Medium Risk</h3>
+
+                    <div class="risk-number">
+                        {{ risk_summary.get('MEDIUM', 0) }}
+                    </div>
+
+                    <p>Products</p>
+                </div>
+
+
+                <div class="risk-card risk-high">
+                    <h3>High Risk</h3>
+
+                    <div class="risk-number">
+                        {{ risk_summary.get('HIGH', 0) }}
+                    </div>
+
+                    <p>Products</p>
+                </div>
+
+
+                <div class="risk-card risk-critical">
+                    <h3>Critical Risk</h3>
+
+                    <div class="risk-number">
+                        {{ risk_summary.get('CRITICAL', 0) }}
+                    </div>
+
+                    <p>Products</p>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- INVENTORY OVERVIEW -->
 
         <div class="placeholder">
 

@@ -182,3 +182,87 @@ body {
     font-size: 32px;
     font-weight: 700;
 }
+
+
+/* RISK DISTRIBUTION */
+
+.risk-section {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    margin-top: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.section-header {
+    margin-bottom: 20px;
+}
+
+.section-header h2 {
+    font-size: 20px;
+    margin-bottom: 6px;
+}
+
+.section-header p {
+    color: #64748b;
+    font-size: 14px;
+}
+
+.risk-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.risk-card {
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+}
+
+.risk-card h3 {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.risk-number {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.risk-card p {
+    color: #64748b;
+    font-size: 13px;
+}
+
+.risk-low {
+    border-left: 4px solid #16a34a;
+}
+
+.risk-medium {
+    border-left: 4px solid #eab308;
+}
+
+.risk-high {
+    border-left: 4px solid #f97316;
+}
+
+.risk-critical {
+    border-left: 4px solid #dc2626;
+}
+
+
+/* RESPONSIVE RISK GRID */
+
+@media (max-width: 900px) {
+    .risk-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .risk-grid {
+        grid-template-columns: 1fr;
+    }
+}
