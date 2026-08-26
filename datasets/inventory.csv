@@ -1,0 +1,13 @@
+product_id,product_name,store_id,region,stock_quantity,reorder_level
+P001,Apple iPhone 15,S001,North,25,20
+P002,Samsung Galaxy S24,S001,North,8,15
+P003,Apple iPhone15,S002,South,5,20
+P004,OnePlus 12,S002,South,30,15
+P005,Samsung Galaxy S24,S003,West,4,15
+P006,Apple iPhone 15,S003,West,40,20
+P007,Boat Airdopes 141,S004,East,12,25
+P008,boAt Airdopes 141,S004,East,18,25
+P009,HP Pavilion Laptop,S005,North,6,10
+P010,HP Pavilion Laptop,S006,South,35,10
+P011,Dell Inspiron 15,S007,West,3,12
+P012,Dell Inspiron15,S008,East,28,12
