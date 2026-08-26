@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>StockSync AI - Dashboard</title>
+    <title>StockSync AI - Upload Dataset</title>
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='css/style.css') }}">
@@ -22,23 +22,10 @@
         </div>
 
         <ul class="nav-menu">
-
-            <li>
-                <a href="/dashboard">Dashboard</a>
-            </li>
-
-            <li>
-                <a href="/upload">Upload Dataset</a>
-            </li>
-
-            <li>
-                <a href="/analysis">Inventory Analysis</a>
-            </li>
-
-            <li>
-                <a href="/reports">Reports</a>
-            </li>
-
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/upload">Upload Dataset</a></li>
+            <li><a href="/analysis">Inventory Analysis</a></li>
+            <li><a href="/reports">Reports</a></li>
         </ul>
 
     </aside>
@@ -47,10 +34,10 @@
 
         <div class="page-header">
 
-            <h1>Dashboard</h1>
+            <h1>Upload Dataset</h1>
 
             <p>
-                Overview of your retail inventory data.
+                Upload inventory, sales, and returns CSV files.
             </p>
 
         </div>
@@ -58,29 +45,28 @@
         <div class="card-grid">
 
             <div class="card">
-                <h3>Total Products</h3>
-                <div class="number">0</div>
+                <h3>Inventory Dataset</h3>
+                <input type="file" accept=".csv">
             </div>
 
             <div class="card">
-                <h3>Total Stores</h3>
-                <div class="number">0</div>
+                <h3>Sales Dataset</h3>
+                <input type="file" accept=".csv">
             </div>
 
             <div class="card">
-                <h3>High Risk Products</h3>
-                <div class="number">0</div>
+                <h3>Returns Dataset</h3>
+                <input type="file" accept=".csv">
             </div>
 
         </div>
 
         <div class="placeholder">
 
-            <h2>Inventory Overview</h2>
+            <h2>Dataset Status</h2>
 
             <p>
-                Inventory analysis will appear here after datasets
-                are uploaded.
+                No datasets uploaded yet.
             </p>
 
         </div>
