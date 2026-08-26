@@ -34,22 +34,203 @@
 
         <div class="page-header">
 
-            <h1>Reports</h1>
+            <h1>Inventory Risk Reports</h1>
 
             <p>
-                View and export inventory risk reports.
+                Review the current inventory risk status and product-level recommendations.
             </p>
 
         </div>
 
-        <div class="placeholder">
+        <!-- SUMMARY -->
 
-            <h2>Reports Coming Soon</h2>
+        <div class="analysis-summary">
 
-            <p>
-                Reports will be available after inventory
-                analysis is completed.
-            </p>
+            <div class="analysis-summary-card">
+                <span>Total Products</span>
+                <strong>{{ total_products }}</strong>
+            </div>
+
+            <div class="analysis-summary-card">
+                <span>Total Stores</span>
+                <strong>{{ total_stores }}</strong>
+            </div>
+
+            <div class="analysis-summary-card">
+                <span>High Risk Products</span>
+                <strong>{{ high_risk_products }}</strong>
+            </div>
+
+            <div class="analysis-summary-card">
+                <span>Critical Products</span>
+                <strong>{{ critical_products }}</strong>
+            </div>
+
+        </div>
+
+
+        <!-- RISK DISTRIBUTION -->
+
+        <div class="risk-section">
+
+            <div class="section-header">
+
+                <h2>Risk Distribution</h2>
+
+                <p>
+                    Current distribution of products across risk levels.
+                </p>
+
+            </div>
+
+            <div class="risk-grid">
+
+                <div class="risk-card risk-low">
+                    <h3>LOW</h3>
+                    <div class="risk-number">
+                        {{ risk_summary.get("LOW", 0) }}
+                    </div>
+                    <p>Low-risk products</p>
+                </div>
+
+                <div class="risk-card risk-medium">
+                    <h3>MEDIUM</h3>
+                    <div class="risk-number">
+                        {{ risk_summary.get("MEDIUM", 0) }}
+                    </div>
+                    <p>Products requiring monitoring</p>
+                </div>
+
+                <div class="risk-card risk-high">
+                    <h3>HIGH</h3>
+                    <div class="risk-number">
+                        {{ risk_summary.get("HIGH", 0) }}
+                    </div>
+                    <p>Products requiring attention</p>
+                </div>
+
+                <div class="risk-card risk-critical">
+                    <h3>CRITICAL</h3>
+                    <div class="risk-number">
+                        {{ risk_summary.get("CRITICAL", 0) }}
+                    </div>
+                    <p>Urgent review required</p>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT REPORT -->
+
+        <div class="analysis-section reports-section">
+
+            <div class="section-header">
+
+                <div>
+                    <h2>Product Risk Report</h2>
+
+                    <p>
+                        Detailed inventory, sales, return and risk information.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="table-container">
+
+                <table class="risk-table">
+
+                    <thead>
+
+                        <tr>
+                            <th>Product</th>
+                            <th>Store</th>
+                            <th>Region</th>
+                            <th>Stock</th>
+                            <th>Shortage</th>
+                            <th>Units Sold</th>
+                            <th>Return Rate</th>
+                            <th>Risk</th>
+                            <th>Recommendation</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for product in products %}
+
+                        <tr>
+
+                            <td>
+                                <strong>{{ product.product_name }}</strong>
+                                <small>{{ product.product_id }}</small>
+                            </td>
+
+                            <td>
+                                {{ product.store_id }}
+                            </td>
+
+                            <td>
+                                {{ product.region }}
+                            </td>
+
+                            <td>
+                                {{ product.stock_quantity }}
+                            </td>
+
+                            <td>
+                                {{ product.shortage_units }}
+                            </td>
+
+                            <td>
+                                {{ product.total_units_sold }}
+                            </td>
+
+                            <td>
+                                {{ product.return_rate }}%
+                            </td>
+
+                            <td>
+
+                                {% if product.overall_risk == "CRITICAL" %}
+                                    <span class="risk-badge risk-critical">
+                                        CRITICAL
+                                    </span>
+
+                                {% elif product.overall_risk == "HIGH" %}
+                                    <span class="risk-badge risk-high">
+                                        HIGH
+                                    </span>
+
+                                {% elif product.overall_risk == "MEDIUM" %}
+                                    <span class="risk-badge risk-medium">
+                                        MEDIUM
+                                    </span>
+
+                                {% else %}
+                                    <span class="risk-badge risk-low">
+                                        LOW
+                                    </span>
+                                {% endif %}
+
+                            </td>
+
+                            <td class="recommendation">
+                                {{ product.recommendation }}
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
 
         </div>
 
