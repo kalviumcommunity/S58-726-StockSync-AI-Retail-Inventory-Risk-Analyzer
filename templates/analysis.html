@@ -7,8 +7,10 @@
 
     <title>StockSync AI - Inventory Analysis</title>
 
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='css/style.css') }}">
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
 </head>
 
 <body>
@@ -22,13 +24,27 @@
         </div>
 
         <ul class="nav-menu">
-            <li><a href="/dashboard">Dashboard</a></li>
-            <li><a href="/upload">Upload Dataset</a></li>
-            <li><a href="/analysis">Inventory Analysis</a></li>
-            <li><a href="/reports">Reports</a></li>
+
+            <li>
+                <a href="/dashboard">Dashboard</a>
+            </li>
+
+            <li>
+                <a href="/upload">Upload Dataset</a>
+            </li>
+
+            <li>
+                <a href="/analysis">Inventory Analysis</a>
+            </li>
+
+            <li>
+                <a href="/reports">Reports</a>
+            </li>
+
         </ul>
 
     </aside>
+
 
     <main class="main-content">
 
@@ -37,25 +53,183 @@
             <h1>Inventory Analysis</h1>
 
             <p>
-                Identify inventory imbalance and high-risk stock.
+                Identify inventory imbalance and high-risk products.
             </p>
 
         </div>
 
-        <div class="placeholder">
 
-            <h2>Analysis Coming Soon</h2>
+        <!-- RISK SUMMARY -->
 
-            <p>
-                Risk analysis will appear here after the datasets
-                are processed.
-            </p>
+        <div class="analysis-summary">
+
+            <div class="analysis-summary-card">
+                <span>Low Risk</span>
+                <strong>{{ risk_summary.get('LOW', 0) }}</strong>
+            </div>
+
+            <div class="analysis-summary-card">
+                <span>Medium Risk</span>
+                <strong>{{ risk_summary.get('MEDIUM', 0) }}</strong>
+            </div>
+
+            <div class="analysis-summary-card">
+                <span>High Risk</span>
+                <strong>{{ risk_summary.get('HIGH', 0) }}</strong>
+            </div>
+
+            <div class="analysis-summary-card">
+                <span>Critical Risk</span>
+                <strong>{{ risk_summary.get('CRITICAL', 0) }}</strong>
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT ANALYSIS -->
+
+        <div class="analysis-section">
+
+            <div class="section-header">
+
+                <div>
+                    <h2>Product Risk Analysis</h2>
+
+                    <p>
+                        Detailed inventory and product performance risk.
+                    </p>
+                </div>
+
+                <div class="risk-filter">
+
+                    <label for="riskFilter">Filter Risk:</label>
+
+                    <select id="riskFilter">
+                        <option value="ALL">All Risks</option>
+                        <option value="LOW">Low</option>
+                        <option value="MEDIUM">Medium</option>
+                        <option value="HIGH">High</option>
+                        <option value="CRITICAL">Critical</option>
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table class="risk-table">
+
+                    <thead>
+
+                        <tr>
+                            <th>Product</th>
+                            <th>Store</th>
+                            <th>Region</th>
+                            <th>Stock</th>
+                            <th>Reorder Level</th>
+                            <th>Units Sold</th>
+                            <th>Return Rate</th>
+                            <th>Inventory Risk</th>
+                            <th>Overall Risk</th>
+                            <th>Recommendation</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="riskTableBody">
+
+                        {% for product in products %}
+
+                        <tr data-risk="{{ product.overall_risk }}">
+
+                            <td>
+                                <strong>{{ product.product_name }}</strong>
+                                <small>{{ product.product_id }}</small>
+                            </td>
+
+                            <td>
+                                {{ product.store_id }}
+                            </td>
+
+                            <td>
+                                {{ product.region }}
+                            </td>
+
+                            <td>
+                                {{ product.stock_quantity }}
+                            </td>
+
+                            <td>
+                                {{ product.reorder_level }}
+                            </td>
+
+                            <td>
+                                {{ product.total_units_sold }}
+                            </td>
+
+                            <td>
+                                {{ "%.2f"|format(product.return_rate) }}%
+                            </td>
+
+                            <td>
+                                <span class="risk-badge risk-{{ product.risk_level|lower }}">
+                                    {{ product.risk_level }}
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="risk-badge risk-{{ product.overall_risk|lower }}">
+                                    {{ product.overall_risk }}
+                                </span>
+                            </td>
+
+                            <td class="recommendation">
+                                {{ product.recommendation }}
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
 
         </div>
 
     </main>
 
 </div>
+
+
+<script>
+
+    const riskFilter = document.getElementById("riskFilter");
+    const rows = document.querySelectorAll("#riskTableBody tr");
+
+    riskFilter.addEventListener("change", function () {
+
+        const selectedRisk = this.value;
+
+        rows.forEach(function (row) {
+
+            const rowRisk = row.dataset.risk;
+
+            if (selectedRisk === "ALL" || rowRisk === selectedRisk) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+
+        });
+
+    });
+
+</script>
 
 </body>
 </html>

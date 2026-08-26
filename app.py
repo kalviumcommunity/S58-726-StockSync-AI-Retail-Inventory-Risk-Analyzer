@@ -49,7 +49,21 @@ def upload():
 
 @app.route("/analysis")
 def analysis():
-    return render_template("analysis.html")
+    df = build_risk_engine()
+
+    risk_summary = (
+        df["overall_risk"]
+        .value_counts()
+        .to_dict()
+    )
+
+    products = df.to_dict(orient="records")
+
+    return render_template(
+        "analysis.html",
+        products=products,
+        risk_summary=risk_summary,
+    )
 
 
 @app.route("/reports")
