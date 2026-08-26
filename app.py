@@ -68,7 +68,36 @@ def analysis():
 
 @app.route("/reports")
 def reports():
-    return render_template("reports.html")
+    df = build_risk_engine()
+
+    total_products = df["product_id"].nunique()
+    total_stores = df["store_id"].nunique()
+
+    critical_products = int(
+        (df["overall_risk"] == "CRITICAL").sum()
+    )
+
+    high_risk_products = int(
+        df["overall_risk"].isin(["HIGH", "CRITICAL"]).sum()
+    )
+
+    risk_summary = (
+        df["overall_risk"]
+        .value_counts()
+        .to_dict()
+    )
+
+    products = df.to_dict(orient="records")
+
+    return render_template(
+        "reports.html",
+        total_products=total_products,
+        total_stores=total_stores,
+        critical_products=critical_products,
+        high_risk_products=high_risk_products,
+        risk_summary=risk_summary,
+        products=products,
+    )
 
 
 if __name__ == "__main__":

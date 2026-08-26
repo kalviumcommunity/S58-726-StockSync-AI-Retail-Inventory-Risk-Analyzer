@@ -441,3 +441,22 @@ body {
     }
 
 }
+
+/* REPORTS PAGE */
+
+.reports-section {
+    margin-top: 25px;
+}
+
+.reports-section .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media (max-width: 900px) {
+    .reports-section .section-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
