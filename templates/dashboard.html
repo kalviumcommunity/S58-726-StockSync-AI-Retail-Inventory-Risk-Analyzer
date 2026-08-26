@@ -7,6 +7,12 @@
     <title>StockSync AI Dashboard</title>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>StockSync Dashboard</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
 </head>
 
 <body>
@@ -26,6 +32,199 @@
         </p>
 
     </div>
+    <main class="container">
+
+        <header class="page-header">
+
+            <div>
+                <p class="eyebrow">STOCKSYNC AI</p>
+
+                <h1>Risk Dashboard</h1>
+
+                <p class="subtitle">
+                    Unified inventory, sales and returns analysis.
+                </p>
+            </div>
+
+            <a href="/" class="secondary-button">
+                Home
+            </a>
+
+        </header>
+
+
+        <section class="summary-grid">
+
+            <div class="summary-card critical">
+                <span>Critical</span>
+                <strong>
+                    {{ risk_summary.get("CRITICAL", 0) }}
+                </strong>
+            </div>
+
+            <div class="summary-card high">
+                <span>High</span>
+                <strong>
+                    {{ risk_summary.get("HIGH", 0) }}
+                </strong>
+            </div>
+
+            <div class="summary-card medium">
+                <span>Medium</span>
+                <strong>
+                    {{ risk_summary.get("MEDIUM", 0) }}
+                </strong>
+            </div>
+
+            <div class="summary-card low">
+                <span>Low</span>
+                <strong>
+                    {{ risk_summary.get("LOW", 0) }}
+                </strong>
+            </div>
+
+        </section>
+
+
+        <section class="table-section">
+
+            <div class="section-header">
+
+                <div>
+                    <h2>Product Risk Analysis</h2>
+
+                    <p>
+                        Current risk assessment for every product.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <!-- Dashboard filters -->
+            <div class="filters">
+
+                <input
+                    id="productSearch"
+                    type="text"
+                    placeholder="Search product or ID..."
+                    autocomplete="off"
+                >
+
+                <select id="riskFilter">
+                    <option value="all">All Risks</option>
+                    <option value="critical">Critical</option>
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+
+            </div>
+
+
+            <!-- Result count -->
+            <p class="result-count" id="resultCount">
+                Showing {{ products|length }} of {{ products|length }} products
+            </p>
+
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Stock</th>
+                            <th>Shortage</th>
+                            <th>Units Sold</th>
+                            <th>Return Rate</th>
+                            <th>Inventory Risk</th>
+                            <th>Return Risk</th>
+                            <th>Overall Risk</th>
+                            <th>Recommendation</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="productTableBody">
+
+                        {% for product in products %}
+
+                        <tr class="product-row">
+
+                            <td>
+                                <strong>
+                                    {{ product.product_name }}
+                                </strong>
+
+                                <small>
+                                    {{ product.product_id }}
+                                </small>
+                            </td>
+
+                            <td>
+                                {{ product.stock_quantity }}
+                            </td>
+
+                            <td>
+                                {{ product.shortage_units }}
+                            </td>
+
+                            <td>
+                                {{ product.total_units_sold }}
+                            </td>
+
+                            <td>
+                                {{ product.return_rate }}%
+                            </td>
+
+                            <td>
+                                <span class="badge {{ product.risk_level|lower }}">
+                                    {{ product.risk_level }}
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="badge {{ product.return_risk|lower }}">
+                                    {{ product.return_risk }}
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="badge {{ product.overall_risk|lower }}">
+                                    {{ product.overall_risk }}
+                                </span>
+                            </td>
+
+                            <td class="recommendation">
+                                {{ product.recommendation }}
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+                <!-- Displayed when no products match -->
+                <div class="no-results" id="noResults">
+                    <strong>No products found</strong>
+                    <p>
+                        Try a different product name, product ID, or risk level.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- Dashboard interaction JavaScript -->
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
 
 </body>
 </html>
